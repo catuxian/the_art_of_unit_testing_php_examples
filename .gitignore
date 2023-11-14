@@ -1,0 +1,4 @@
+# ignore vendor
+/vendor/
+composer.phar
+composer.lock

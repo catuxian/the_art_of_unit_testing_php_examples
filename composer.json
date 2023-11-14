@@ -1,0 +1,6 @@
+{
+    "name": "root/the_art_of_unit_testing",
+    "require": {
+        "phpunit/phpunit": "^10.4"
+    }
+}
