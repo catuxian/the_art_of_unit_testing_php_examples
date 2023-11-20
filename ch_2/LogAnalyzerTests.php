@@ -26,4 +26,26 @@ class LogAnalyzerTests extends TestCase{
         $result = $logAnalyzer->IsValidLogFileName("filewithbadextension.SLF");
         $this->assertTrue($result);
     }
+
+    public function testIsValidFileName_EmptyFileName_ThrowsException()
+    {
+        $logAnalyzer = new LogAnalyzer;
+        $fileName = '';
+
+        $this->expectException(\Exception::class);
+        $logAnalyzer->IsValidLogFileName($fileName);
+    }
+
+    public function testIsValidFileName_EmptyFileName_Throws()
+    {
+        try {
+            $logAnalyzer = new LogAnalyzer;
+            $fileName = '';
+
+            $logAnalyzer->IsValidLogFileName($fileName);
+
+        } catch (\Exception $exception) {
+            $this->assertStringContainsString("filename has to be provided.", $exception->getMessage());
+        }
+    }
 }
