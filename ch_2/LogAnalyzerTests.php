@@ -56,4 +56,20 @@ class LogAnalyzerTests extends TestCase{
         $logAnalyzer->IsValidLogFileName("badname.foo");
         $this->assertFalse($logAnalyzer->WasLastFileNameValid);
     }
+
+    public static function additionProvider(): array
+    {
+        return [
+            ["badfile.foo", false],
+            ["goodfile.slf", true]
+        ];
+    }
+
+    #[DataProvider('additionProvider')]
+    public function testIsValidFileNames_WhenCalled_ChangesWasLastFileNameValid(string $file, bool $expected)
+    {
+        $logAnalyzer = new LogAnalyzer;
+        $result = $logAnalyzer->IsValidLogFileName($file);
+        $this->assertSame($expected, $result);
+    }
 }
