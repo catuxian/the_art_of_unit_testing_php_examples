@@ -3,6 +3,7 @@
 require_once 'vendor/autoload.php';
 require_once 'LogAnalyzer.php';
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class LogAnalyzerTests extends TestCase{
@@ -47,5 +48,12 @@ class LogAnalyzerTests extends TestCase{
         } catch (\Exception $exception) {
             $this->assertStringContainsString("filename has to be provided.", $exception->getMessage());
         }
+    }
+
+    public function testIsValidFileName_WhenCalled_ChangesWasLastFileNameValid()
+    {
+        $logAnalyzer = new LogAnalyzer;
+        $logAnalyzer->IsValidLogFileName("badname.foo");
+        $this->assertFalse($logAnalyzer->WasLastFileNameValid);
     }
 }
