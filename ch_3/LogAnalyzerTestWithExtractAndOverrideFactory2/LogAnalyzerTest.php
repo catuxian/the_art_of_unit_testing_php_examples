@@ -1,10 +1,9 @@
 <?php
 
-namespace ch_3\LogAnalyzerTestWithExtractAndOverrideFactory;
+namespace ch_3\LogAnalyzerTestWithExtractAndOverrideFactory2;
 
 require_once 'vendor/autoload.php';
 
-require_once 'FileExtensionManagerFactory.php';
 require_once 'LogAnalyzerUsingFactoryMethod.php';
 require_once 'FileExtensionManagerInterface.php';
 require_once 'LogAnalyzer.php';
@@ -16,12 +15,10 @@ use PHPUnit\Framework\TestCase;
  */
 class LogAnalyzerTest extends TestCase
 {
-    public function testOverrideTest()
+    public function testOverrideTestWithoutStub()
     {
-        $stub = new FakeExtensionManager;
-        $stub->willBeValid = true;
-
-        $logan = new TestableLogAnalyzer($stub);
+        $logan = new TestableLogAnalyzer();
+        $logan->isSupported = true;
         $result = $logan->IsValidLogFileName('file.ext');
 
         $this->assertTrue($result);
@@ -30,16 +27,12 @@ class LogAnalyzerTest extends TestCase
 
 class TestableLogAnalyzer extends LogAnalyzerUsingFactoryMethod
 {
-    public FileExtensionManagerInterface $manager;
+    public bool $isSupported;
 
-    public function __construct(FileExtensionManagerInterface $manager)
+    public function isValid(string $fileName): bool
     {
-        $this->manager = $manager;
-    }
-
-    protected function getManager(): FileExtensionManagerInterface
-    {
-        return $this->manager;
+        // 回傳測試程式中設定的假值
+        return $this->isSupported;
     }
 }
 

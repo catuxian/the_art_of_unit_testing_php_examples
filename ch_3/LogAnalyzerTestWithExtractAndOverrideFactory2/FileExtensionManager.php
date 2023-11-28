@@ -1,5 +1,5 @@
 <?php
-namespace ch_3\LogAnalyzerTestWithGetSet;
+namespace ch_3\LogAnalyzerTestWithExtractAndOverrideFactory2;
 
 require_once 'FileExtensionManagerInterface.php';
 

@@ -1,7 +1,6 @@
 <?php
-namespace ch_3\LogAnalyzerTestWithExtractAndOverrideFactory;
+namespace ch_3\LogAnalyzerTestWithExtractAndOverrideFactory2;
 
-require_once 'FileExtensionManagerFactory.php';
 require_once 'FileExtensionManagerInterface.php';
 
 class LogAnalyzer
