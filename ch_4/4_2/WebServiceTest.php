@@ -20,9 +20,12 @@ class WebServiceTest extends TestCase
         $tooShortFileName = "abc.ext";
         $log->analyze($tooShortFileName);
 
-        $this->assertStringContainsString("someone@somewhere.com", $mockEmail->to);
-        $this->assertStringContainsString("can't log", $mockEmail->subject);
-        $this->assertStringContainsString("fake exception", $mockEmail->body);
+        $expectedEmail = new EmailInfo;
+        $expectedEmail->body = "fake exception";
+        $expectedEmail->to = "someone@somewhere.com";
+        $expectedEmail->subject = "can't log";
+
+        $this->assertObjectEquals($expectedEmail, $mockEmail->email);
     }
 }
 
@@ -39,15 +42,11 @@ class FakeWebService implements WebServiceInterface
 }
 
 class FakeEmailService implements EmailServiceInterface
-{
-    public string $to;
-    public string $subject;
-    public string $body;
+{   
+    public ?EmailInfo $email = null;
 
-    public function sendMail(string $to, string $subject, string $body): void
+    public function sendMail($emailInfo): void
     {
-        $this->to = $to;
-        $this->subject = $subject;
-        $this->body = $body;
+        $this->email = $emailInfo;
     }
 }

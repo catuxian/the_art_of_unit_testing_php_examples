@@ -42,8 +42,27 @@ class LogAnalyzer
             try {
                 $this->service->logError("Filename too short:" . $fileName);
             } catch (\Exception $e) {
-                $this->email->sendMail("someone@somewhere.com", "can't log", $e->getMessage());
+
+                $emailInfo = new EmailInfo;
+                $emailInfo->to = "someone@somewhere.com";
+                $emailInfo->subject = "can't log";
+                $emailInfo->body = $e->getMessage();
+
+                $this->email->sendMail($emailInfo);
             }
         }
+    }
+}
+
+
+class EmailInfo
+{
+    public string $body;
+    public string $to;
+    public string $subject;
+
+    public function equals(self $other): bool
+    {
+        return $this->body === $other->body && $this->to === $other->to && $this->subject === $other->subject;
     }
 }
