@@ -1,6 +1,16 @@
 {
     "name": "root/the_art_of_unit_testing",
     "require": {
-        "phpunit/phpunit": "^10.4"
+        "phpunit/phpunit": "^10.4",
+        "mockery/mockery": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "ch_1\\": "ch_1/",
+            "ch_2\\": "ch_2/",
+            "ch_3\\": "ch_3/",
+            "ch_4\\": "ch_4/",
+            "ch_5\\": "ch_5/"
+        }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace ch_2;
+
 use function PHPUnit\Framework\throwException;
 
 class LogAnalyzer {
